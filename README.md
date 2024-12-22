@@ -28,6 +28,11 @@ Run the queue work command to start processing jobs on the queue.
 php artisan queue:work
 ```
 
+Run the the schedule run command to run the FetchNews command
+```sh
+php artisan schedule:run
+```
+
 ## Add more news sources
 This application has been built to make it easier to fetch news from more sources. To do this:
 
