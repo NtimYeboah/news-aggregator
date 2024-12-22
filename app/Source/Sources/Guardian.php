@@ -6,7 +6,12 @@ use App\Source\Source;
 
 class Guardian extends Source
 {
-    public function url()
+    /**
+     * Get full qualified url for source.
+     *
+     * @return string
+     */
+    public function url(): string
     {
         $url = "{$this->endpoint()}?api-key={$this->apiKey()}";
 

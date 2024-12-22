@@ -13,8 +13,14 @@ class GetNews implements ShouldQueue
 {
     use Queueable;
 
+    /**
+     * Number of request retries.
+     */
     public const RETRY = 3;
 
+    /**
+     * Time to wait before retry.
+     */
     public const RETRY_WAIT_TIME = 100; // In milliseconds
 
     /**
@@ -44,6 +50,12 @@ class GetNews implements ShouldQueue
         TransformResponse::dispatch($response->json(), $sourceTransformer);
     }
 
+    /**
+     * Called when job fails.
+     *
+     * @param Throwable|null $exception
+     * @return void
+     */
     public function failed(?Throwable $exception): void
     {
         $this->retrievalAttempt->setFailed();

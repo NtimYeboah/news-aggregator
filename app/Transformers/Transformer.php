@@ -6,18 +6,58 @@ use App\Actions\SaveNewsHandler;
 
 abstract class Transformer
 {
+    /**
+     * Returned list of news from source.
+     *
+     * @var array
+     */
     public array $news;
 
-    public abstract function getArticle(array $data);
+    /**
+     * Get transformed article.
+     *
+     * @param array $data
+     * @return array
+     */
+    public abstract function getArticle(array $data): array;
 
-    public abstract function getAuthor(array $data);
+    /**
+     * Get transformed author's name.
+     *
+     * @param array $data
+     * @return string|null
+     */
+    public abstract function getAuthor(array $data): string|null;
 
-    public abstract function getCategory(array $data);
+    /**
+     * Get transformed category.
+     *
+     * @param array $data
+     * @return array
+     */
+    public abstract function getCategory(array $data): array;
 
-    public abstract function getSource(array $data);
+    /**
+     * Get transformed source.
+     *
+     * @param array $data
+     * @return array
+     */
+    public abstract function getSource(array $data): array;
 
-    public abstract function isValid(array $data);
+    /**
+     * Determine whether news item is valid to be saved.
+     *
+     * @param array $data
+     * @return boolean
+     */
+    public abstract function isValid(array $data): bool;
 
+    /**
+     * Save news.
+     *
+     * @return void
+     */
     public function process()
     {
         foreach ($this->news as $news) {
@@ -31,7 +71,13 @@ abstract class Transformer
         }
     }
 
-    public function transform(array $data)
+    /**
+     * Transform response to appropriate format to be saved.
+     *
+     * @param array $data
+     * @return array
+     */
+    public function transform(array $data): array
     {
         return [
             'source' => $this->getSource($data),

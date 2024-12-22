@@ -6,7 +6,18 @@ use App\Transformers\Transformer;
 
 class NewYorkTimes extends Transformer
 {
+    /**
+     * Response status
+     *
+     * @var string|null
+     */
     public ?string $status;
+
+    /**
+     * Returned list of news from source.
+     *
+     * @var array
+     */
     public array $news;
 
     public function __construct(array $response)
@@ -15,7 +26,13 @@ class NewYorkTimes extends Transformer
         $this->news = $response['response']['docs'];
     }
 
-    public function getArticle(array $data)
+    /**
+     * Get transformed article.
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getArticle(array $data): array
     {
         return [
             'title' => $data['headline']['main'],
@@ -27,7 +44,13 @@ class NewYorkTimes extends Transformer
         ];
     }
 
-    public function getAuthor(array $data)
+    /**
+     * Get transformed author's name.
+     *
+     * @param array $data
+     * @return string|null
+     */
+    public function getAuthor(array $data): string|null
     {
         $person = $data['byline']['person'];
 
@@ -38,21 +61,39 @@ class NewYorkTimes extends Transformer
         return null;
     }
 
-    public function getCategory(array $data)
+    /**
+     * Get transformed category.
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getCategory(array $data): array
     {
         return [
             'name' => $data['news_desk'] ?? $data['section_name'] ?? $data['subsection_name'],
         ];
     }
 
-    public function getSource(array $data)
+    /**
+     * Get transformed source.
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getSource(array $data): array
     {
         return [
             'name' => 'New York Times',
         ];
     }
 
-    public function isValid(array $data)
+    /**
+     * Determine whether news item is valid to be saved.
+     *
+     * @param array $data
+     * @return boolean
+     */
+    public function isValid(array $data): bool
     {
         return true;
     }

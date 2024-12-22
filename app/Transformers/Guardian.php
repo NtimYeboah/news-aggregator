@@ -6,10 +6,39 @@ use App\Transformers\Transformer;
 
 class Guardian extends Transformer
 {
+    /**
+     * The status of the request.
+     *
+     * @var string|null
+     */
     public ?string $status;
-    public ?string $totalResults;
-    public ?string $pages;
+
+    /**
+     * Total number of results returned.
+     *
+     * @var int|null
+     */
+    public ?int $totalResults;
+
+    /**
+     * Total number of pages returned
+     *
+     * @var int|null
+     */
+    public ?int $pages;
+
+    /**
+     * Current page for pagination.
+     *
+     * @var string|null
+     */
     public ?string $currentPage;
+
+    /**
+     * Returned list of news from source.
+     *
+     * @var array
+     */
     public array $news;
 
     public function __construct(array $response)
@@ -21,7 +50,13 @@ class Guardian extends Transformer
         $this->news = $response['response']['results'];
     }
 
-    public function getArticle(array $data)
+    /**
+     * Get transformed article.
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getArticle(array $data): array
     {
         return [
             'title' => $data['webTitle'],
@@ -34,26 +69,50 @@ class Guardian extends Transformer
         ];
     }
 
-    public function getAuthor(array $data)
+    /**
+     * Get transformed author's name.
+     *
+     * @param array $data
+     * @return string|null
+     */
+    public function getAuthor(array $data): string|null
     {
         return 'Guardian';
     }
 
-    public function getCategory(array $data)
+    /**
+     * Get transformed category.
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getCategory(array $data): array
     {
         return [
             'name' => $data['sectionName'] ?? null,
         ];
     }
 
-    public function getSource(array $data)
+    /**
+     * Get transformed source.
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getSource(array $data): array
     {
         return [
             'name' => 'Guardian',
         ];
     }
 
-    public function isValid(array $data)
+    /**
+     * Determine whether news item is valid to be saved.
+     *
+     * @param array $data
+     * @return boolean
+     */
+    public function isValid(array $data): bool
     {
         return true;
     }

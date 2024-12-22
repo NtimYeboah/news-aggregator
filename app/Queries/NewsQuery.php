@@ -10,16 +10,62 @@ use Illuminate\Support\Arr;
 
 class NewsQuery
 {
+    /**
+     * The search term.
+     *
+     * @var string|null
+     */
     public ?string $term;
+    
+    /**
+     * The date to retrieve news from.
+     *
+     * @var string|null
+     */
     public ?string $dateFrom;
+
+    /**
+     * The date to retrieve news to.
+     *
+     * @var string|null
+     */
     public ?string $dateTo;
+
+    /**
+     * The sources of the news.
+     *
+     * @var string|null
+     */
     public ?string $sources;
+
+    /**
+     * The authors of the news.
+     *
+     * @var string|null
+     */
     public ?string $authors;
+
+    /**
+     * The categories of the news.
+     *
+     * @var string|null
+     */
     public ?string $categories;
+
+    /**
+     * The number of news to retrieve.
+     *
+     * @var integer|null
+     */
     public ?int $perPage;
     
     public const PER_PAGE = 50;
 
+    /**
+     * Constructor.
+     *
+     * @param array $queryParameters
+     */
     public function __construct(array $queryParameters)
     {
         $this->term = Arr::get($queryParameters, 'q');
@@ -31,6 +77,9 @@ class NewsQuery
         $this->perPage = Arr::get($queryParameters, 'per_page');
     }
 
+    /**
+     * Run query
+     */
     public function run()
     {
         return News::with(['source', 'category', 'author'])

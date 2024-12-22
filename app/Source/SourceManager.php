@@ -2,13 +2,24 @@
 
 namespace App\Source;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class SourceManager
 {
+    /**
+     * Configures sources
+     *
+     * @var array
+     */
     public array $config;
 
-    protected $retrievalInterval;
+    /**
+     * Retrieval interval value.
+     *
+     * @var string
+     */
+    protected string $retrievalInterval;
 
     public function __construct()
     {
@@ -16,6 +27,11 @@ class SourceManager
         $this->retrievalInterval = config('news-sources.retrieval_interval_minutes');
     }
 
+    /**
+     * Get configured sources.
+     *
+     * @return Collection
+     */
     public function get()
     {
         $sources = collect();
@@ -29,6 +45,11 @@ class SourceManager
         return $sources;
     }
 
+    /**
+     * Get retrieval interval value.
+     *
+     * @return string
+     */
     public function retrievalInterval()
     {
         return $this->retrievalInterval;

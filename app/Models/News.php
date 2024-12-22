@@ -4,28 +4,53 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Arr;
 
 class News extends Model
 {
     use HasFactory;
     
-    public function source()
+    /**
+     * Source relationship.
+     *
+     * @return BelongsTo
+     */
+    public function source(): BelongsTo
     {
         return $this->belongsTo(Source::class, 'source_id');
     }
 
-    public function category()
+    /**
+     * Category relationship.
+     *
+     * @return BelongsTo
+     */
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public function author()
+    /**
+     * Author relationship.
+     *
+     * @return BelongsTo
+     */
+    public function author(): BelongsTo
     {
         return $this->belongsTo(Author::class, 'author_id');
     }
 
-    public static function saveOne(Source $source, Author $author, Category $category, $details)
+    /**
+     * Save a new article as news.
+     *
+     * @param Source $source
+     * @param Author $author
+     * @param Category $category
+     * @param array $details
+     * @return void
+     */
+    public static function saveOne(Source $source, Author $author, Category $category, array $details)
     {
         $news = new self;
 

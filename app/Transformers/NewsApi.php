@@ -7,7 +7,19 @@ use App\Transformers\Transformer;
 class NewsApi extends Transformer
 {
     public ?string $status;
-    public ?string $totalResults;
+
+    /**
+     * Total number of results returned.
+     *
+     * @var int|null
+     */
+    public ?int $totalResults;
+
+    /**
+     * Returned list of news from source.
+     *
+     * @var array
+     */
     public array $news;
 
     public function __construct(array $response)
@@ -17,7 +29,13 @@ class NewsApi extends Transformer
         $this->news = $response['articles'];
     }
 
-    public function getArticle(array $data)
+    /**
+     * Get transformed article.
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getArticle(array $data): array
     {
         return [
             'title' => $data['title'],
@@ -29,22 +47,46 @@ class NewsApi extends Transformer
         ];
     }
 
-    public function getAuthor(array $data)
+    /**
+     * Get transformed author's name.
+     *
+     * @param array $data
+     * @return string|null
+     */
+    public function getAuthor(array $data): string|null
     {
         return $data['author'] ?? null;
     }
 
-    public function getCategory(array $data)
+    /**
+     * Get transformed category.
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getCategory(array $data): array
     {
         return [];
     }
 
-    public function getSource(array $data)
+    /**
+     * Get transformed source.
+     *
+     * @param array $data
+     * @return array
+     */
+    public function getSource(array $data): array
     {
         return $data['source'];
     }
 
-    public function isValid(array $data)
+    /**
+     * Determine whether news item is valid to be saved.
+     *
+     * @param array $data
+     * @return boolean
+     */
+    public function isValid(array $data): bool
     {
         return $data['source']['name'] !== '[Removed]';
     }

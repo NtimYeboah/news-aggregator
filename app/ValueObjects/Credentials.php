@@ -6,6 +6,11 @@ use RuntimeException;
 
 class Credentials
 {
+    /**
+     * Constructor.
+     *
+     * @param array $credentials
+     */
     private function __construct(private array $credentials)
     {
         // Throw exception when api_key and endpoint keys doesn't exist in array
@@ -18,17 +23,33 @@ class Credentials
         }
     }
 
-    public static function fromArray(array $credentials)
+    /**
+     * Transform from array.
+     *
+     * @param array $credentials
+     * @return self
+     */
+    public static function fromArray(array $credentials): self
     {
         return new self($credentials);
     }
 
-    public function apiKey()
+    /**
+     * Get the API Key based on the credentials.
+     *
+     * @return string
+     */
+    public function apiKey(): string
     {
         return $this->credentials['api_key'];
     }
 
-    public function endpoint()
+    /**
+     * Get endpoint based on the credentials.
+     *
+     * @return string
+     */
+    public function endpoint(): string
     {
         return $this->credentials['endpoint'];
     }

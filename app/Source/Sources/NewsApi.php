@@ -7,7 +7,13 @@ use App\ValueObjects\QueryParameters;
 
 class NewsApi extends Source
 {
-    public function setQueryParameters(array $parameters)
+    /**
+     * Set query parameters for source.
+     *
+     * @param array $parameters
+     * @return void
+     */
+    public function setQueryParameters(array $parameters): void
     {
         $defaultParameters = [
             'retrieve_from' => '',
@@ -21,7 +27,12 @@ class NewsApi extends Source
         $this->queryParameters = QueryParameters::fromArray(array_merge($defaultParameters, $parameters));
     }
 
-    public function url()
+    /**
+     * Get full qualified url for source.
+     *
+     * @return string
+     */
+    public function url(): string
     {
         $url = "{$this->endpoint()}?apiKey={$this->apiKey()}";
 

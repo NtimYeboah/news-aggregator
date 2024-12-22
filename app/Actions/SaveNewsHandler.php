@@ -9,7 +9,7 @@ use App\Models\Source;
 use Illuminate\Support\Str;
 
 class SaveNewsHandler
-{
+{   
     public array $source;
     public array $category;
     public ?string $author;
@@ -23,6 +23,11 @@ class SaveNewsHandler
         $this->article = $data['article'];
     }
 
+    /**
+     * Save news.
+     *
+     * @return void
+     */
     public function execute()
     {
         $source = $this->saveSource();
@@ -32,7 +37,12 @@ class SaveNewsHandler
         News::saveOne($source, $author, $category, $this->article);
     }
 
-    protected function saveSource()
+    /**
+     * Save a new source.
+     *
+     * @return Source
+     */
+    public function saveSource()
     {
         $source = $this->source['name'] ??
             Source::firstOrCreate(
@@ -50,7 +60,12 @@ class SaveNewsHandler
         return $source;
     }
 
-    protected function saveCategory()
+    /**
+     * Save a new category.
+     *
+     * @return Category
+     */
+    public function saveCategory()
     {
         $category = $this->category['name'] ??
             Category::firstOrCreate(
@@ -69,7 +84,12 @@ class SaveNewsHandler
         return $category;
     }
 
-    protected function saveAuthor()
+    /**
+     * Save a new author.
+     *
+     * @return Author
+     */
+    public function saveAuthor()
     {
         $author = $this->author ??
             Author::firstOrCreate(
