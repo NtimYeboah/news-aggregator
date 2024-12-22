@@ -24,6 +24,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->text('url');
             $table->text('image_url')->nullable();
+            $table->text('api_url')->nullable();
             $table->timestamp('published_at');
             $table->timestamps();
         });

@@ -15,11 +15,11 @@ class Guardian extends Source
         }
 
         if ($retrieveFrom = $this->queryParameters->retrieveFrom()) {
-            $url = $url . "&from-date={$retrieveFrom}";
+            $url = $url . "&from-date={$retrieveFrom->toDateString()}";
         }
 
         if ($retrieveTo = $this->queryParameters->retrieveTo()) {
-            $url = $url . "&to-date={$retrieveTo}";
+            $url = $url . "&to-date={$retrieveTo->toDateString()}";
         }
 
         if ($pageSize = $this->queryParameters->pageSize()) {

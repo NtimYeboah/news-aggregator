@@ -9,7 +9,6 @@ use App\Enums\NewsRetrievalEventStatus;
 use App\Jobs\GetNews;
 use App\Models\NewsRetrievalAttempt;
 use App\Models\NewsRetrievalEvent;
-use App\ValueObjects\QueryParameters;
 
 class NewsRetrievalHandler
 {
@@ -33,25 +32,18 @@ class NewsRetrievalHandler
             $latestNewsRetrievalEvent = NewsRetrievalEvent::create([
                 'source' => $source->name(),
                 'status' => NewsRetrievalEventStatus::STARTED->value,
-                'started_at' => now()->subMinutes($this->sources->retrievalInterval())->toDateString(),
+                'started_at' => now()->subMinutes($this->sources->retrievalInterval()),
             ]);
         }
 
         return $latestNewsRetrievalEvent;
     }
 
-    protected function setSourceQueryParameters(Source $source, NewsRetrievalEvent $retrievalEvent, $parameters = [])
+    protected function setSourceQueryParameters(Source $source, NewsRetrievalEvent $retrievalEvent)
     {
-        $queryParameters = QueryParameters::fromArray(array_merge([
+        $source->setQueryParameters([
             'retrieve_from' => $retrievalEvent->started_at,
-            'retrieve_to' => '',
-            'search_term' => 'football',
-            'sort_key' => '',
-            'page_size' => '',
-            'page' => '',
-        ], $parameters));
-
-        $source->setQueryParameters($queryParameters);
+        ]);
     }
 
     protected function getNewsFromSource(Source $source)

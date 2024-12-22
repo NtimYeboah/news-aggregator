@@ -19,11 +19,6 @@ abstract class Source
 
     public abstract function url();
 
-    public function setQueryParameters(QueryParameters $paramters)
-    {
-        $this->queryParameters = $paramters;
-    }
-
     public function name(): string
     {
         return $this->key();
@@ -46,5 +41,19 @@ abstract class Source
         $names = collect(explode('\\', $qualifiedClassName));
 
         return Str::snake($names->last(), '-');
+    }
+
+    public function setQueryParameters(array $parameters)
+    {
+        $defaultParameters = [
+            'retrieve_from' => '',
+            'retrieve_to' => '',
+            'search_term' => '',
+            'sort_key' => '',
+            'page_size' => '',
+            'page' => '',
+        ];
+
+        $this->queryParameters = QueryParameters::fromArray(array_merge($defaultParameters, $parameters));
     }
 }
