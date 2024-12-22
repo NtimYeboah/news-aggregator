@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Actions\NewsRetrievalHandler;
-use App\Actions\Source\SourceManager;
+use App\Source\SourceManager;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 

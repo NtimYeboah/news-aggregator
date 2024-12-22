@@ -2,7 +2,10 @@
 
 namespace Tests\Unit;
 
-use App\Actions\Source\SourceManager;
+use App\Source\SourceManager;
+use App\Source\Sources\Guardian;
+use App\Source\Sources\NewsApi;
+use App\Source\Sources\NewYorkTimes;
 use Illuminate\Support\Facades\Config;
 use Tests\TestCase;
 
@@ -22,5 +25,9 @@ class SourceManagerTest extends TestCase
         $sources = (new SourceManager())->get();
     
         $this->assertCount(3, $sources);
+
+        $this->assertInstanceOf(NewsApi::class, $sources->get(0));
+        $this->assertInstanceOf(NewYorkTimes::class, $sources->get(1));
+        $this->assertInstanceOf(Guardian::class, $sources->get(2));
     }
 }

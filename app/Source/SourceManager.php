@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Source;
+namespace App\Source;
 
 use Illuminate\Support\Str;
 
@@ -21,7 +21,7 @@ class SourceManager
         $sources = collect();
 
         foreach ($this->config as $sourceKey => $envVars) {
-            $sourceClass = '\\App\\Actions\\Source\\Sources\\'. Str::studly($sourceKey);
+            $sourceClass = '\\App\\Source\\Sources\\'. Str::studly($sourceKey);
 
             $sources->push(new $sourceClass($envVars));
         }

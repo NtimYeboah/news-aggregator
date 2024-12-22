@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Actions\Source\Sources;
+namespace App\Source\Sources;
 
-use App\Actions\Source\Source;
+use App\Source\Source;
 use App\ValueObjects\QueryParameters;
 
 class NewsApi extends Source

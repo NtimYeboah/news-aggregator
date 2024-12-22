@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Source;
+namespace App\Source;
 
 use App\ValueObjects\Credentials;
 use App\ValueObjects\QueryParameters;

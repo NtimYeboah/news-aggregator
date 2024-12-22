@@ -2,8 +2,8 @@
 
 namespace App\Actions;
 
-use App\Actions\Source\Source;
-use App\Actions\Source\SourceManager;
+use App\Source\Source;
+use App\Source\SourceManager;
 use App\Enums\NewsRetrievalAttemptStatus;
 use App\Enums\NewsRetrievalEventStatus;
 use App\Jobs\GetNews;

@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Actions\NewsRetrievalHandler;
-use App\Actions\Source\SourceManager;
+use App\Source\SourceManager;
 use App\Jobs\GetNews;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
