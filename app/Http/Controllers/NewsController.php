@@ -12,7 +12,6 @@ class NewsController extends Controller
     {
         $news = (new NewsQuery($request->validated()))->run();
 
-        //return $news->load(['source', 'category', 'author']);
-        return NewsResource::collection($news->load(['source', 'category', 'author']));
+        return NewsResource::collection($news);
     }
 }

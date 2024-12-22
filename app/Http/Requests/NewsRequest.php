@@ -28,6 +28,7 @@ class NewsRequest extends FormRequest
             'categories' => ['sometimes', 'string'],
             'sources' => ['sometimes', 'string'],
             'authors' => ['sometimes', 'string'],
+            'per_page' => ['sometimes', 'integer'],
         ];
     }
 }

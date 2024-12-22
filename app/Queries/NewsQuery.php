@@ -16,6 +16,7 @@ class NewsQuery
     public ?string $sources;
     public ?string $authors;
     public ?string $categories;
+    public ?int $perPage;
     
     public const PER_PAGE = 50;
 
@@ -27,11 +28,12 @@ class NewsQuery
         $this->sources = Arr::get($queryParameters, 'sources');
         $this->authors = Arr::get($queryParameters, 'authors');
         $this->categories = Arr::get($queryParameters, 'categories');
+        $this->perPage = Arr::get($queryParameters, 'per_page');
     }
 
     public function run()
     {
-        return News::query()
+        return News::with(['source', 'category', 'author'])
             ->when($this->sources, function ($query) {
                 $query->whereIn('source_id', Source::query()->whereIn('slug', explode(',',$this->sources))->select('id'));
             })
@@ -52,7 +54,7 @@ class NewsQuery
                 $query->where('published_at', '<=', $this->dateTo);
             })
             ->select('news.*')
-            ->paginate(self::PER_PAGE);
+            ->paginate($this->perPage ?? self::PER_PAGE);
     }
 }
 
