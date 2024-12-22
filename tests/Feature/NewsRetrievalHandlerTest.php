@@ -21,8 +21,8 @@ class NewsRetrievalHandlerTest extends TestCase
         Config::set('news-sources.sources.news_api.api_key', '123abc');
         Config::set('news-sources.sources.news_api.endpoint', $this->faker->url());
 
-        //Config::set('news-sources.sources.new_york_times.api_key', '123abc');
-        //Config::set('news-sources.sources.new_york_times.endpoint', $this->faker->url());
+        Config::set('news-sources.sources.new_york_times.api_key', '123abc');
+        Config::set('news-sources.sources.new_york_times.endpoint', $this->faker->url());
 
         Config::set('news-sources.sources.guardian.api_key', '123abc');
         Config::set('news-sources.sources.guardian.endpoint', $this->faker->url());
@@ -31,6 +31,6 @@ class NewsRetrievalHandlerTest extends TestCase
 
         $newsRetrievalHander->execute();
 
-        Queue::assertPushed(GetNews::class, 2); // change to 3 when you add new york times
+        Queue::assertPushed(GetNews::class, 3);
     }
 }

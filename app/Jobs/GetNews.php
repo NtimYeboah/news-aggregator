@@ -31,11 +31,9 @@ class GetNews implements ShouldQueue
     public function handle(): void
     {
         $this->retrievalAttempt->setStarted();
-
+        
         $response = Http::retry(self::RETRY, self::RETRY_WAIT_TIME)
             ->get($this->retrievalAttempt->getUrl());
-
-        logger(['response' => $response->json()]);
 
         $response->throwIf($response->failed());
 

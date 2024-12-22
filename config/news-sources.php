@@ -9,10 +9,10 @@ return [
             'endpoint' => env('NEWSAPI_ENDPOINT'),
         ],
 
-        /* 'new_york_times' => [
+        'new_york_times' => [
             'api_key' => env('NEWYORKTIMES_APIKEY'),
             'endpoint' => env('NEWYORKTIMES_ENDPOINT'),
-        ], */
+        ],
 
         'guardian' => [
             'api_key' => env('GUARDIANAPI_APIKEY'),
