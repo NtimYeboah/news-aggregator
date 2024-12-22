@@ -45,6 +45,6 @@ abstract class Source
 
         $names = collect(explode('\\', $qualifiedClassName));
 
-        return Str::lower($names->last());
+        return Str::snake($names->last(), '-');
     }
 }

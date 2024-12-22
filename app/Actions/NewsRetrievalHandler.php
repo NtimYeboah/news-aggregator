@@ -63,6 +63,7 @@ class NewsRetrievalHandler
         $retrievalAttempt = NewsRetrievalAttempt::create([
             'event_id' => $latestNewsRetrievalEvent->getKey(),
             'retrieved_from' => $latestNewsRetrievalEvent->started_at,
+            'source' => $source->name(),
             'status' => NewsRetrievalAttemptStatus::NOT_STARTED->value,
             'url' => $source->url(),
         ]);

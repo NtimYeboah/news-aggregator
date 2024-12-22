@@ -6,6 +6,7 @@ use App\Models\NewsRetrievalAttempt;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Throwable;
 
 class GetNews implements ShouldQueue
@@ -34,13 +35,15 @@ class GetNews implements ShouldQueue
         $response = Http::retry(self::RETRY, self::RETRY_WAIT_TIME)
             ->get($this->retrievalAttempt->getUrl());
 
-        logger(['response' => $response->body()]);
+        logger(['response' => $response->json()]);
 
         $response->throwIf($response->failed());
 
         $this->retrievalAttempt->setCompleted($response);
 
-        //SaveNews::dispatch(NewsDTO::fromArray($response->body()));
+        $sourceTransformer = 'App\\Transformers\\'. Str::studly($this->retrievalAttempt->source);
+
+        TransformResponse::dispatch($response->json(), $sourceTransformer);
     }
 
     public function failed(?Throwable $exception): void

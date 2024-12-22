@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(NewsRetrievalEvent::class, 'event_id');
             $table->string('status');
+            $table->string('source');
             $table->string('url');
             $table->string('response_code')->nullable();
             $table->smallInteger('total_results')->nullable();

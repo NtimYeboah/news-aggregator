@@ -26,8 +26,6 @@ return new class extends Migration
             $table->text('image_url')->nullable();
             $table->timestamp('published_at');
             $table->timestamps();
-
-            // Add indexes to speed up title and content text query
         });
     }
 
