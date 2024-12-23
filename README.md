@@ -28,6 +28,11 @@ Run the queue work command to start processing jobs on the queue.
 php artisan queue:work
 ```
 
+Run this command to run the schedules command.
+```sh
+php artisan schedule:run
+```
+
 ## Getting news articles
 Use the `/api/news` endpoint to get news from the backend. This endpoint include parameters to filter your news results. These are:
 1. Filter by source.
