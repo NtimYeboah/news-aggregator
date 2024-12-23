@@ -20,7 +20,7 @@ GUARDIANAPI_ENDPOINT=https://content.guardianapis.com/search
 NEWYORKTIMES_APIKEY=
 NEWYORKTIMES_ENDPOINT=https://api.nytimes.com/svc/search/v2/articlesearch.json
 
-NEWS_RETRIEVAL_INTERVAL_MINUTES=
+NEWS_RETRIEVAL_INTERVAL_MINUTES=1440
 ```
 
 Run the queue work command to start processing jobs on the queue.
