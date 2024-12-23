@@ -23,14 +23,14 @@ NEWYORKTIMES_ENDPOINT=https://api.nytimes.com/svc/search/v2/articlesearch.json
 NEWS_RETRIEVAL_INTERVAL_MINUTES=1440
 ```
 
-Run the queue work command to start processing jobs on the queue.
-```sh
-php artisan queue:work
-```
-
 Run this command to run the schedules command.
 ```sh
 php artisan schedule:run
+```
+
+Run the queue work command to start processing jobs on the queue.
+```sh
+php artisan queue:work
 ```
 
 ## Getting news articles
