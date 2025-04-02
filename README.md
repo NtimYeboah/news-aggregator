@@ -1,6 +1,6 @@
 # New Aggregator
 
-Take-home challenge for the Backend web developer position.
+Pull news from various sources.
 
 ## Setup
 
