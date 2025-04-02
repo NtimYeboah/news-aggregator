@@ -25,7 +25,7 @@ NEWS_RETRIEVAL_INTERVAL_MINUTES=1440
 
 Run this command to run the schedules command.
 ```sh
-php artisan schedule:run
+php artisan schedule:work
 ```
 
 Run the queue work command to start processing jobs on the queue.
